@@ -1,0 +1,128 @@
+{
+  "nome": "pedido_delivery",
+  "descricao": "Ciclo de vida de um pedido de delivery: pagamento, preparo, entrega e cancelamento.",
+  "estados": [
+    "aguardando_pagamento",
+    "confirmado",
+    "em_preparo",
+    "a_caminho",
+    "entregue",
+    "cancelado"
+  ],
+  "entradas": [
+    "pagar",
+    "avancar",
+    "cancelar"
+  ],
+  "inicial": "aguardando_pagamento",
+  "transicoes": [
+    {
+      "de": "aguardando_pagamento",
+      "entrada": "pagar",
+      "para": "confirmado",
+      "saida": "pagamento_ok"
+    },
+    {
+      "de": "aguardando_pagamento",
+      "entrada": "avancar",
+      "para": "aguardando_pagamento",
+      "saida": "erro"
+    },
+    {
+      "de": "aguardando_pagamento",
+      "entrada": "cancelar",
+      "para": "cancelado",
+      "saida": "cancelado"
+    },
+    {
+      "de": "confirmado",
+      "entrada": "pagar",
+      "para": "confirmado",
+      "saida": "erro"
+    },
+    {
+      "de": "confirmado",
+      "entrada": "avancar",
+      "para": "em_preparo",
+      "saida": "preparando"
+    },
+    {
+      "de": "confirmado",
+      "entrada": "cancelar",
+      "para": "cancelado",
+      "saida": "estornado"
+    },
+    {
+      "de": "em_preparo",
+      "entrada": "pagar",
+      "para": "em_preparo",
+      "saida": "erro"
+    },
+    {
+      "de": "em_preparo",
+      "entrada": "avancar",
+      "para": "a_caminho",
+      "saida": "saiu_para_entrega"
+    },
+    {
+      "de": "em_preparo",
+      "entrada": "cancelar",
+      "para": "em_preparo",
+      "saida": "erro"
+    },
+    {
+      "de": "a_caminho",
+      "entrada": "pagar",
+      "para": "a_caminho",
+      "saida": "erro"
+    },
+    {
+      "de": "a_caminho",
+      "entrada": "avancar",
+      "para": "entregue",
+      "saida": "entregue"
+    },
+    {
+      "de": "a_caminho",
+      "entrada": "cancelar",
+      "para": "a_caminho",
+      "saida": "erro"
+    },
+    {
+      "de": "entregue",
+      "entrada": "pagar",
+      "para": "entregue",
+      "saida": "erro"
+    },
+    {
+      "de": "entregue",
+      "entrada": "avancar",
+      "para": "entregue",
+      "saida": "ja_entregue"
+    },
+    {
+      "de": "entregue",
+      "entrada": "cancelar",
+      "para": "entregue",
+      "saida": "erro"
+    },
+    {
+      "de": "cancelado",
+      "entrada": "pagar",
+      "para": "cancelado",
+      "saida": "erro"
+    },
+    {
+      "de": "cancelado",
+      "entrada": "avancar",
+      "para": "cancelado",
+      "saida": "pedido_cancelado"
+    },
+    {
+      "de": "cancelado",
+      "entrada": "cancelar",
+      "para": "cancelado",
+      "saida": "erro"
+    }
+  ]
+}

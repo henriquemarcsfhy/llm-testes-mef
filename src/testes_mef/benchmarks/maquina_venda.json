@@ -1,0 +1,71 @@
+{
+  "nome": "maquina_venda",
+  "descricao": "Máquina de venda: produto custa 3; aceita moedas de 1 e 2 e devolve o crédito.",
+  "estados": [
+    "credito0",
+    "credito1",
+    "credito2"
+  ],
+  "entradas": [
+    "moeda1",
+    "moeda2",
+    "devolver"
+  ],
+  "inicial": "credito0",
+  "transicoes": [
+    {
+      "de": "credito0",
+      "entrada": "moeda1",
+      "para": "credito1",
+      "saida": "nada"
+    },
+    {
+      "de": "credito0",
+      "entrada": "moeda2",
+      "para": "credito2",
+      "saida": "nada"
+    },
+    {
+      "de": "credito0",
+      "entrada": "devolver",
+      "para": "credito0",
+      "saida": "nada"
+    },
+    {
+      "de": "credito1",
+      "entrada": "moeda1",
+      "para": "credito2",
+      "saida": "nada"
+    },
+    {
+      "de": "credito1",
+      "entrada": "moeda2",
+      "para": "credito0",
+      "saida": "produto"
+    },
+    {
+      "de": "credito1",
+      "entrada": "devolver",
+      "para": "credito0",
+      "saida": "devolve1"
+    },
+    {
+      "de": "credito2",
+      "entrada": "moeda1",
+      "para": "credito0",
+      "saida": "produto"
+    },
+    {
+      "de": "credito2",
+      "entrada": "moeda2",
+      "para": "credito0",
+      "saida": "produto_troco1"
+    },
+    {
+      "de": "credito2",
+      "entrada": "devolver",
+      "para": "credito0",
+      "saida": "devolve2"
+    }
+  ]
+}

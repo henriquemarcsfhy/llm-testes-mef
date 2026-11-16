@@ -1,0 +1,90 @@
+{
+  "nome": "fechadura_senha",
+  "descricao": "Fechadura eletrônica que abre com a senha 2-1-2; 'trancar' volta ao início.",
+  "estados": [
+    "travada",
+    "digitou2",
+    "digitou21",
+    "aberta"
+  ],
+  "entradas": [
+    "d1",
+    "d2",
+    "trancar"
+  ],
+  "inicial": "travada",
+  "transicoes": [
+    {
+      "de": "travada",
+      "entrada": "d1",
+      "para": "travada",
+      "saida": "bip"
+    },
+    {
+      "de": "travada",
+      "entrada": "d2",
+      "para": "digitou2",
+      "saida": "bip"
+    },
+    {
+      "de": "travada",
+      "entrada": "trancar",
+      "para": "travada",
+      "saida": "ja_trancada"
+    },
+    {
+      "de": "digitou2",
+      "entrada": "d1",
+      "para": "digitou21",
+      "saida": "bip"
+    },
+    {
+      "de": "digitou2",
+      "entrada": "d2",
+      "para": "digitou2",
+      "saida": "bip"
+    },
+    {
+      "de": "digitou2",
+      "entrada": "trancar",
+      "para": "travada",
+      "saida": "ja_trancada"
+    },
+    {
+      "de": "digitou21",
+      "entrada": "d1",
+      "para": "travada",
+      "saida": "erro"
+    },
+    {
+      "de": "digitou21",
+      "entrada": "d2",
+      "para": "aberta",
+      "saida": "aberta"
+    },
+    {
+      "de": "digitou21",
+      "entrada": "trancar",
+      "para": "travada",
+      "saida": "ja_trancada"
+    },
+    {
+      "de": "aberta",
+      "entrada": "d1",
+      "para": "aberta",
+      "saida": "ignorado"
+    },
+    {
+      "de": "aberta",
+      "entrada": "d2",
+      "para": "aberta",
+      "saida": "ignorado"
+    },
+    {
+      "de": "aberta",
+      "entrada": "trancar",
+      "para": "travada",
+      "saida": "trancada"
+    }
+  ]
+}
