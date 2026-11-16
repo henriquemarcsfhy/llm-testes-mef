@@ -95,3 +95,19 @@ def test_limite_de_taxa_interrompe_o_experimento(tmp_path):
     linhas = [json.loads(x) for x in saida.read_text().splitlines()]
     assert len(linhas) == 1 and linhas[0]["erro_infra"]
     assert len(cliente.chamadas) == 1  # parou em vez de queimar as próximas MEFs
+
+
+def test_analise_reconhece_a_cobertura_de_transicoes(tmp_path):
+    from testes_mef.analise import comparar
+    from testes_mef.metodos import cobertura_de_transicoes
+
+    arq = tmp_path / "x.testes.jsonl"
+    arq.write_text(
+        json.dumps({"mef": "maquina_venda", "testes_finais": [list(t) for t in cobertura_de_transicoes(VENDA)]})
+        + "\n"
+        + json.dumps({"mef": "pedido_delivery", "testes_finais": [["pagar"]]})
+        + "\n",
+        "utf-8",
+    )
+    r = comparar(arq)
+    assert r[0]["identico"] and not r[1]["identico"]
